@@ -3,6 +3,7 @@ var inputBTN = document.getElementById("inputBTN");
 var tasksList = document.getElementById("tasklist");
 var taskSelector = document.getElementById("taskSelect");
 var time = document.getElementById("timeTracker");
+var trackerSection = document.getElementById("timeTracker");
 
 var timeStart;
 var timeEnd;
@@ -10,6 +11,9 @@ var timeTracked;
 var timerInterval;
 
 var isTrackingTime = false;
+var isTaskDone = false;
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 function addElement(parent, newElement, text, addID) {
     var element = document.createElement(newElement);
@@ -19,22 +23,42 @@ function addElement(parent, newElement, text, addID) {
     return element;
 }
 
+function deleteElement(element) {
+    element.parentElement.removeChild(element);
+}
+
 function addBtn(parent, btnText, addID, f) {
     if (parent !== null && parent !== undefined) {
         addElement(parent, "button", btnText, addID).addEventListener("click", f);
     }
 }
 
-function deleteElement(element) {
-    element.parentElement.removeChild(element);
-}
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 function addTask() {
     var taskID = "id_" + input.value;
-    addElement(tasksList, "li", input.value, taskID);
+    var task = addElement(tasksList, "li", input.value, taskID);
     var taskOption = addElement(taskSelector, "option", input.value);
+
+    task.addEventListener("click", toggleTaskDone);
     taskOption.setAttribute("selected", "");
+
     input.value = "";
+}
+
+function toggleTaskDone(event) {
+    var targetTask = event.target;
+
+    targetTask.classList.toggle("task-done");
+    isTaskDone = !isTaskDone;
+
+    targetTask.addEventListener("dblclick", deleteTask);
+}
+
+function deleteTask(event) {
+
+        deleteElement(event.target);
+        console.log("DELETED!");
 }
 
 function startTimeTrack() {
@@ -58,7 +82,7 @@ function stopTimeTrack() {
         clearInterval(timerInterval);
         deleteElement(document.getElementById("timeDisplay"));
         deleteElement(stopBtn);
-        printTrackingtime()
+        printTrackingtime();
     }
 }
 
@@ -72,10 +96,21 @@ function getTrackedTime(timeTracked) {
 }
 
 function printTrackingtime() {
-    timeTracked = timeEnd - timeStart;
+    var taskid = "id_"+taskSelector.value;
+    var taskInList = document.getElementById(taskid);
+    var timeTrackInTask = taskInList.firstElementChild;
+
     if (tasksList.children.length > 0) {
-        var taskInList = document.getElementById("id_" + taskSelector.value);
-        addElement(taskInList, "p", getTrackedTime(timeTracked), "taskTimePrint");
+        if (timeTrackInTask !== null) {
+            //TODO: add timeTracked to the value already tracked - math isn't working!!!
+            timeTracked += timeEnd - timeStart;
+            timeTrackInTask.textContent = getTrackedTime(timeTracked);
+        }
+        else {
+            timeTracked = timeEnd - timeStart;
+            addElement(taskInList, "p", getTrackedTime(timeTracked), "taskTimePrint");
+            console.log("NEW!");
+        }
     }
 }
 
@@ -101,8 +136,9 @@ function taskBTN() {
     }
 }
 
-inputBTN.addEventListener("click", taskBTN);
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+inputBTN.addEventListener("click", taskBTN);
 
 input.addEventListener("keypress", taskKeyPress);
 

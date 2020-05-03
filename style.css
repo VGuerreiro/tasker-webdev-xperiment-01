@@ -1,3 +1,15 @@
-* {
-    
+html{
+
 }
+
+main{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.task-done{
+    text-decoration: line-through;
+}
+
