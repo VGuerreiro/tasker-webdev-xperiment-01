@@ -38,7 +38,7 @@ function addBtn(parent, btnText, addID, f) {
 function addTask() {
     var taskID = "id_" + input.value;
     var task = addElement(tasksList, "li", input.value, taskID);
-    var taskOption = addElement(taskSelector, "option", input.value);
+    var taskOption = addElement(taskSelector, "option", input.value, taskID + "_opt");
 
     task.addEventListener("click", toggleTaskDone);
     taskOption.setAttribute("selected", "");
@@ -56,9 +56,11 @@ function toggleTaskDone(event) {
 }
 
 function deleteTask(event) {
+    var targetTask = event.target;
+    var taskInSelect = document.getElementById(targetTask.id + "_opt");
 
-        deleteElement(event.target);
-        console.log("DELETED!");
+    deleteElement(targetTask);
+    deleteElement(taskInSelect);
 }
 
 function startTimeTrack() {
@@ -96,7 +98,7 @@ function getTrackedTime(timeTracked) {
 }
 
 function printTrackingtime() {
-    var taskid = "id_"+taskSelector.value;
+    var taskid = "id_" + taskSelector.value;
     var taskInList = document.getElementById(taskid);
     var timeTrackInTask = taskInList.firstElementChild;
 
@@ -109,7 +111,6 @@ function printTrackingtime() {
         else {
             timeTracked = timeEnd - timeStart;
             addElement(taskInList, "p", getTrackedTime(timeTracked), "taskTimePrint");
-            console.log("NEW!");
         }
     }
 }
