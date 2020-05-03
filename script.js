@@ -4,7 +4,6 @@ var tasksList = document.getElementById("tasklist");
 var taskSelector = document.getElementById("taskSelect");
 var time = document.getElementById("timeTracker");
 
-
 var timeStart;
 var timeEnd;
 var timeTracked;
@@ -33,12 +32,16 @@ function deleteElement(element) {
 function addTask() {
     var taskID = "id_" + input.value;
     addElement(tasksList, "li", input.value, taskID);
-    addElement(taskSelector, "option", input.value);
+    var taskOption = addElement(taskSelector, "option", input.value);
+    taskOption.setAttribute("selected", "");
     input.value = "";
 }
 
 function startTimeTrack() {
-    if (!isTrackingTime) {
+    if (tasksList.children.length <= 0) {
+        alert("Plesse add a new task to track.")
+    }
+    if (!isTrackingTime && tasksList.children.length > 0) {
         timeStart = new Date().getTime();
         isTrackingTime = true;
         addBtn(time, "Stop Tracking", "stopTimer", stopTimeTrack);
