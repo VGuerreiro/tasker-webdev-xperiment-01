@@ -120,7 +120,7 @@ function updateTime() {
     if (isTrackingTime && timeDisplay !== null) {
         timeEnd = new Date().getTime();
         timeTracked = timeEnd - timeStart;
-        timeDisplay.innerHTML = getTrackedTime(timeTracked);
+        timeDisplay.textContent = getTrackedTime(timeTracked);
         console.log(getTrackedTime(timeTracked));
     }
 }
