@@ -15,11 +15,12 @@ var isTaskDone = false;
 
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-function addElement(parent, newElement, text, addID) {
+function addElement(parent, newElement, text, addID, addClass) {
     var element = document.createElement(newElement);
     element.appendChild(document.createTextNode(text));
     parent.appendChild(element);
     element.setAttribute("id", addID);
+    element.classList.add(addClass);
     return element;
 }
 
@@ -37,7 +38,7 @@ function addBtn(parent, btnText, addID, f) {
 
 function addTask() {
     var taskID = "id_" + input.value;
-    var task = addElement(tasksList, "li", input.value, taskID);
+    var task = addElement(tasksList, "li", input.value, taskID, "task");
     var taskOption = addElement(taskSelector, "option", input.value, taskID + "_opt");
 
     task.addEventListener("click", toggleTaskDone);
@@ -89,7 +90,6 @@ function stopTimeTrack() {
 }
 
 function getTrackedTime(timeTracked) {
-
     var hours = Math.floor((timeTracked % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((timeTracked % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((timeTracked % (1000 * 60)) / 1000);

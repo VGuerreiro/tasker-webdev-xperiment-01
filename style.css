@@ -1,11 +1,123 @@
+*{
+    padding: 0;
+    margin: 0;    
+}
+
+html{
+    background-color: beige;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
+}
+
+
+ul{
+    list-style: none;
+}
+
+header{
+    background-color: darkcyan;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+nav ul, a{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #ccd6df;
+    background-color: gray;
+    padding: 0.125em;
+    border-radius: 5px;
+}
+
+
+header h1{
+    margin-top: 3rem;
+    font-size: 3.5rem;
+    font-weight: 700;
+
+    text-align: center;
+}
+
 main{
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    margin: 2rem;
+}
+
+input, select{
+    border: solid .125em darkgrey;
+    border-radius: 15px;
+    padding: 0.5em;
+}
+
+
+
+button{
+    color: white;
+    background-color: orange;
+    border: solid .125em darkgoldenrod;
+    border-radius: 15px;
+    padding: 0.5em;
+}
+
+button:hover{
+    color: white;
+    background-color: darkgoldenrod;
+}
+
+.task{
+    background-color: aliceblue;
+    border: solid black 0.05em;
+    margin: 0.5em;
+    padding: 1.5em;
+    border-radius: 35px;
+}
+
+.task:hover{
+    background-color: #ccd6df;
 }
 
 .task-done{
     text-decoration: line-through;
 }
+
+#timeTracker{
+    margin-top: 2rem;
+}
+
+#startTimer{
+    color: white;
+    background-color: crimson;
+    border-color: darkred;
+}
+
+#startTimer:hover{
+    color: white;
+    background-color: darkred;
+    border-color: crimson;
+}
+
+#stopTimer{
+    color: black;
+    background-color: lemonchiffon;
+    border-color: darkgoldenrod;
+}
+
+#stopTimer:hover{
+    color: white;
+    background-color: darkgoldenrod;
+    border-color: lemonchiffon;
+}
+
 
