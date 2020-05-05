@@ -77,11 +77,22 @@ button:hover{
 }
 
 .task{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
     background-color: aliceblue;
     border: solid black 0.05em;
     margin: 0.5em;
     padding: 1.5em;
     border-radius: 35px;
+    font-weight: 700;
+}
+
+.task > p{
+    margin-left: auto;
+    font-weight: 300;
+    
 }
 
 .task:hover{

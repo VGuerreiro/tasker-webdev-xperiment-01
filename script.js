@@ -51,8 +51,8 @@ function toggleTaskDone(event) {
     var targetTask = event.target;
 
     targetTask.classList.toggle("task-done");
-    isTaskDone = !isTaskDone;
 
+    isTaskDone = !isTaskDone;
     targetTask.addEventListener("dblclick", deleteTask);
 }
 
